@@ -123,7 +123,9 @@ The server provides 6 MCP tools:
    - Bitwise operations: `TOP.flags & 4'b0001` (check if bit 0 is set)
    - Bitwise NOT: `~TOP.mask` (invert all bits)
 
-## Installation
+## Usage
+
+### Installation
 
 ```bash
 # Clone the repository
@@ -134,7 +136,27 @@ cd waveform-mcp
 cargo build --release
 ```
 
-The built binary will be at `target/release/waveform-mcp`. It uses STDIO for transport. Configure your MCP client accordingly.
+The built binary will be at `target/release/waveform-mcp`. It uses STDIO for transport by default. Configure your MCP client accordingly.
+
+### Running
+
+```bash
+# Run the server with stdio transport (default)
+target/release/waveform-mcp
+
+# Run the server in HTTP mode
+target/release/waveform-mcp --http
+
+# Run the server in HTTP mode with custom bind address
+target/release/waveform-mcp --http --bind-address 0.0.0.0:8000
+```
+
+The server supports two transport modes:
+
+- **Stdio mode** (default): Uses standard input/output for MCP communication
+- **HTTP mode**: Uses streamable HTTP server for remote access at `/mcp` endpoint
+
+When running in HTTP mode, the server listens on the specified bind address (default: `127.0.0.1:8000`). HTTP mode allows the waveform store to be shared across multiple HTTP sessions, enabling remote analysis of waveform files.
 
 ## Development
 
@@ -150,27 +172,6 @@ cargo build --release
 ```bash
 cargo test
 ```
-
-### Running
-
-```bash
-# Run the server with stdio transport (default)
-cargo run
-
-# Run the server in HTTP mode
-cargo run -- --http
-
-# Run the server in HTTP mode with custom bind address
-cargo run -- --http --bind-address 0.0.0.0:8000
-```
-
-The server supports two transport modes:
-
-- **Stdio mode** (default): Uses standard input/output for MCP communication
-- **HTTP mode**: Uses streamable HTTP server for remote access at `/mcp` endpoint
-
-When running in HTTP mode, the server listens on the specified bind address (default: `127.0.0.1:8000`). HTTP mode allows the waveform store to be shared across multiple HTTP sessions, enabling remote analysis of waveform files.
-
 ## License
 
 [MIT](LICENSE)
