@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Added
+- **close_waveform** tool - Close waveforms and free memory
+  - Useful for long-running HTTP sessions to manage memory usage
+  - Returns success confirmation or error if waveform not found
+- Server instructions updated to include `close_waveform`
+
+### Changed
+- Updated `rmcp` from 0.14 to 0.16
+- Updated `lalrpop` and `lalrpop-util` from 0.22 to 0.23
+
 ## [0.3.0] - 2025-12-28
 
 ### Added
