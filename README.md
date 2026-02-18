@@ -14,7 +14,7 @@ An MCP (Model Context Protocol) server for reading and analyzing waveform files 
 
 ## Tools
 
-The server provides 6 MCP tools:
+The server provides 7 MCP tools:
 
 1. **open_waveform** - Open a waveform file
    - `file_path`: Path to .vcd or .fst file
@@ -25,7 +25,15 @@ The server provides 6 MCP tools:
    Waveform opened successfully with alias: waveform.vcd
    ```
 
-2. **list_signals** - List all signals in an open waveform
+2. **close_waveform** - Close a waveform and free its memory
+   - `waveform_id`: ID or alias of the waveform to close
+
+   **Example response:**
+   ```
+   Waveform 'waveform.vcd' closed successfully
+   ```
+
+3. **list_signals** - List all signals in an open waveform
    - `waveform_id`: ID or alias of the waveform
    - `name_pattern`: Optional substring to filter signals by name (case-insensitive)
    - `hierarchy_prefix`: Optional prefix to filter signals by hierarchy path
@@ -40,7 +48,7 @@ The server provides 6 MCP tools:
    top.data
    ```
 
-3. **read_signal** - Read signal values at specific time indices
+4. **read_signal** - Read signal values at specific time indices
    - `waveform_id`: ID or alias of the waveform
    - `signal_path`: Hierarchical path to signal (e.g., "top.module.signal")
    - `time_index`: Optional single time index to read
@@ -53,7 +61,7 @@ The server provides 6 MCP tools:
    Time index 20 (20ns): 1
    ```
 
-4. **get_signal_info** - Get metadata about a signal
+5. **get_signal_info** - Get metadata about a signal
    - `waveform_id`: ID or alias of the waveform
    - `signal_path`: Hierarchical path to signal
 
@@ -65,7 +73,7 @@ The server provides 6 MCP tools:
    Index: [7:0]
    ```
 
-5. **find_signal_events** - Find all signal changes within a time range
+6. **find_signal_events** - Find all signal changes within a time range
    - `waveform_id`: ID or alias of the waveform
    - `signal_path`: Hierarchical path to signal
    - `start_time_index`: Optional start of time range (default: 0)
@@ -80,7 +88,7 @@ The server provides 6 MCP tools:
    Time index 20 (20ns): 0
    ```
 
-6. **find_conditional_events** - Find events where a condition is satisfied
+7. **find_conditional_events** - Find events where a condition is satisfied
    - `waveform_id`: ID or alias of waveform
    - `condition`: Conditional expression to evaluate
    - `start_time_index`: Optional start of time range (default: 0)

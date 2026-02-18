@@ -13,14 +13,15 @@ An MCP (Model Context Protocol) server for reading and analyzing VCD/FST wavefor
 - **hierarchy.rs**: Signal/scope lookup by hierarchical path
 - **signal.rs**: Signal reading, event finding, and metadata
 
-## MCP Tools (6 total)
+## MCP Tools (7 total)
 
 1. `open_waveform` - Open VCD/FST files, assign optional alias
-2. `list_signals` - List signals with name_pattern, hierarchy_prefix filters
-3. `read_signal` - Read values at time_index or time_indices
-4. `get_signal_info` - Get signal type, width, index range
-5. `find_signal_events` - Find all changes in time range
-6. `find_conditional_events` - Complex condition search with expression parser
+2. `close_waveform` - Close waveform and free memory
+3. `list_signals` - List signals with name_pattern, hierarchy_prefix filters
+4. `read_signal` - Read values at time_index or time_indices
+5. `get_signal_info` - Get signal type, width, index range
+6. `find_signal_events` - Find all changes in time range
+7. `find_conditional_events` - Complex condition search with expression parser
 
 ## Key Dependencies
 

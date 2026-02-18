@@ -18,7 +18,7 @@ path = "src/main.rs"
 
 [dependencies]
 wellen = "0.20"
-rmcp = { version = "0.14", features = ["transport-io", "transport-streamable-http-server"] }
+rmcp = { version = "0.16", features = ["transport-io", "transport-streamable-http-server"] }
 tokio = { version = "1.48", features = ["full"] }
 tokio-util = { version = "0.7", features = [] }
 serde = { version = "1.0", features = ["derive"] }
@@ -28,14 +28,14 @@ tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 async-trait = "0.1"
 futures = "0.3"
-lalrpop-util = { version = "0.22", features = ["lexer"] }
+lalrpop-util = { version = "0.23", features = ["lexer"] }
 axum = "0.8.8"
 clap = { version = "4.5.53", features = ["derive"] }
 num-bigint = "0.4"
 num-traits = "0.2"
 
 [build-dependencies]
-lalrpop = "0.22"
+lalrpop = "0.23"
 
 [dev-dependencies]
 tempfile = "3.24"

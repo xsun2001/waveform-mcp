@@ -131,6 +131,11 @@ fn default_find_conditional_events_limit() -> Option<isize> {
     Some(100)
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize, schemars::JsonSchema)]
+pub struct CloseWaveformArgs {
+    pub waveform_id: String,
+}
+
 impl Default for WaveformHandler {
     fn default() -> Self {
         Self::new()
@@ -361,6 +366,26 @@ impl WaveformHandler {
             events.join("\n")
         ))]))
     }
+
+    #[tool(description = "Close a waveform and free its memory")]
+    async fn close_waveform(
+        &self,
+        args: Parameters<CloseWaveformArgs>,
+    ) -> Result<CallToolResult, McpError> {
+        let args = &args.0;
+        let mut waveforms = self.waveforms.write().await;
+
+        match waveforms.remove(&args.waveform_id) {
+            Some(_) => Ok(CallToolResult::success(vec![Content::text(format!(
+                "Waveform '{}' closed successfully",
+                args.waveform_id
+            ))])),
+            None => Ok(CallToolResult::error(vec![Content::text(format!(
+                "Waveform not found: {}",
+                args.waveform_id
+            ))])),
+        }
+    }
 }
 
 #[tool_handler]
@@ -372,7 +397,7 @@ impl ServerHandler for WaveformHandler {
             server_info: Implementation::from_build_env(),
             instructions: Some(
                 "MCP server for reading VCD/FST waveform files using the wellen library. \
-                Available tools: open_waveform, list_signals, read_signal, get_signal_info, find_signal_events, find_conditional_events."
+                Available tools: open_waveform, close_waveform, list_signals, read_signal, get_signal_info, find_signal_events, find_conditional_events."
                     .to_string(),
             ),
         }
