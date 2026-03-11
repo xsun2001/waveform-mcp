@@ -4,6 +4,51 @@
 
 An MCP (Model Context Protocol) server for reading and analyzing waveform files (VCD/FST format) using the [wellen](https://github.com/ekiwi/wellen) library.
 
+## Usage
+
+### Installation
+
+Install via cargo:
+
+```bash
+cargo install waveform-mcp
+```
+
+The built binary will be at `~/.local/bin/waveform-mcp`.
+
+Install manually:
+
+```bash
+# Clone the repository
+git clone https://github.com/jiegec/waveform-mcp
+cd waveform-mcp
+
+# Build the server
+cargo build --release
+```
+
+The built binary will be at `target/release/waveform-mcp`.
+
+### Running
+
+```bash
+# Run the server with stdio transport (default)
+target/release/waveform-mcp
+
+# Run the server in HTTP mode
+target/release/waveform-mcp --http
+
+# Run the server in HTTP mode with custom bind address
+target/release/waveform-mcp --http --bind-address 0.0.0.0:8000
+```
+
+The server supports two transport modes:
+
+- **Stdio mode** (default): Uses standard input/output for MCP communication
+- **HTTP mode**: Uses streamable HTTP server for remote access at `/mcp` endpoint
+
+When running in HTTP mode, the server listens on the specified bind address (default: `127.0.0.1:8000`). HTTP mode allows the waveform store to be shared across multiple HTTP sessions, enabling remote analysis of waveform files.
+
 ## Features
 
 - Open VCD (Value Change Dump) and FST (Fast Signal Trace) waveform files
@@ -132,41 +177,6 @@ The server provides 7 MCP tools:
    - Complex condition: `(TOP.valid && TOP.data != 8'hFF) || TOP.error`
    - Bitwise operations: `TOP.flags & 4'b0001` (check if bit 0 is set)
    - Bitwise NOT: `~TOP.mask` (invert all bits)
-
-## Usage
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/jiegec/waveform-mcp
-cd waveform-mcp
-
-# Build the server
-cargo build --release
-```
-
-The built binary will be at `target/release/waveform-mcp`. It uses STDIO for transport by default. Configure your MCP client accordingly.
-
-### Running
-
-```bash
-# Run the server with stdio transport (default)
-target/release/waveform-mcp
-
-# Run the server in HTTP mode
-target/release/waveform-mcp --http
-
-# Run the server in HTTP mode with custom bind address
-target/release/waveform-mcp --http --bind-address 0.0.0.0:8000
-```
-
-The server supports two transport modes:
-
-- **Stdio mode** (default): Uses standard input/output for MCP communication
-- **HTTP mode**: Uses streamable HTTP server for remote access at `/mcp` endpoint
-
-When running in HTTP mode, the server listens on the specified bind address (default: `127.0.0.1:8000`). HTTP mode allows the waveform store to be shared across multiple HTTP sessions, enabling remote analysis of waveform files.
 
 ## Standalone CLI
 
