@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Bumped to Rust 2024 edition
+
+### Documentation
+- Added cargo install instructions and reorganized README usage section
+- Fixed installation path from `~/.local/bin` to `~/.cargo/bin`
+- Added crates.io link and badge
+- Removed too-long keyword from Cargo.toml
+
 ## [0.4.0] - 2026-03-11
 
 ### Added
