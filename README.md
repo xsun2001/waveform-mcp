@@ -14,7 +14,7 @@ Install via cargo:
 cargo install waveform-mcp
 ```
 
-The built binary will be at `~/.local/bin/waveform-mcp`.
+The built binary will be at `~/.cargo/bin/waveform-mcp`.
 
 Install manually:
 
