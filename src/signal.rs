@@ -47,10 +47,10 @@ pub fn list_signals(
     }
 
     // Apply limit if provided and not -1 (unlimited)
-    if let Some(limit) = limit {
-        if limit >= 0 {
-            signals.truncate(limit as usize);
-        }
+    if let Some(limit) = limit
+        && limit >= 0
+    {
+        signals.truncate(limit as usize);
     }
 
     signals

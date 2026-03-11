@@ -9,7 +9,7 @@ pub mod hierarchy;
 pub mod signal;
 
 // Re-export public functions
-pub use cli_parser::{parse_args, Command};
+pub use cli_parser::{Command, parse_args};
 pub use condition::find_conditional_events;
 pub use formatting::{format_signal_value, format_time};
 pub use hierarchy::find_scope_by_path;

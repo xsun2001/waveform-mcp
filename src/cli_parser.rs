@@ -283,7 +283,7 @@ fn parse_find_signal_events(args: &[String]) -> Result<Command, String> {
                 return Err(format!(
                     "Unknown option '{}' for find_signal_events",
                     args[i]
-                ))
+                ));
             }
         }
         i += 1;
@@ -340,7 +340,7 @@ fn parse_find_conditional_events(args: &[String]) -> Result<Command, String> {
                 return Err(format!(
                     "Unknown option '{}' for find_conditional_events",
                     args[i]
-                ))
+                ));
             }
         }
         i += 1;

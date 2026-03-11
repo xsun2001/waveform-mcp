@@ -14,8 +14,8 @@
 use std::collections::HashMap;
 use std::path::PathBuf;
 use waveform_mcp::{
-    find_conditional_events, find_signal_by_path, find_signal_events, get_signal_metadata,
-    list_signals, parse_args, read_signal_values, Command,
+    Command, find_conditional_events, find_signal_by_path, find_signal_events, get_signal_metadata,
+    list_signals, parse_args, read_signal_values,
 };
 
 fn print_usage() {
@@ -32,26 +32,36 @@ fn print_usage() {
     println!("  close_waveform <waveform_id>");
     println!("    Close a waveform and free its memory");
     println!();
-    println!("  list_signals <waveform_id> [--pattern <pattern>] [--hierarchy <prefix>] [--recursive <true|false>] [--limit <n>]");
+    println!(
+        "  list_signals <waveform_id> [--pattern <pattern>] [--hierarchy <prefix>] [--recursive <true|false>] [--limit <n>]"
+    );
     println!("    List signals matching optional pattern");
     println!();
-    println!("  read_signal <waveform_id> <signal_path> [--time-index <idx> | --time-indices <idx1,idx2,...>]");
+    println!(
+        "  read_signal <waveform_id> <signal_path> [--time-index <idx> | --time-indices <idx1,idx2,...>]"
+    );
     println!("    Read signal values at specific time indices");
     println!();
     println!("  get_signal_info <waveform_id> <signal_path>");
     println!("    Get metadata about a signal");
     println!();
-    println!("  find_signal_events <waveform_id> <signal_path> [--start <idx>] [--end <idx>] [--limit <n>]");
+    println!(
+        "  find_signal_events <waveform_id> <signal_path> [--start <idx>] [--end <idx>] [--limit <n>]"
+    );
     println!("    Find all changes (events) of a signal in a time range");
     println!();
-    println!("  find_conditional_events <waveform_id> <condition> [--start <idx>] [--end <idx>] [--limit <n>]");
+    println!(
+        "  find_conditional_events <waveform_id> <condition> [--start <idx>] [--end <idx>] [--limit <n>]"
+    );
     println!("    Find events where a condition is satisfied");
     println!("    Condition syntax supports: signal paths, ~ (NOT), & (AND), | (OR),");
     println!("    ^ (XOR), &&, ||, ==, !=, $past(), bit extraction, Verilog literals");
     println!();
     println!("Examples:");
     println!("  waveform-cli open_waveform test.vcd");
-    println!("  waveform-cli open_waveform test.fst --alias mywave -- list_signals mywave --pattern clock");
+    println!(
+        "  waveform-cli open_waveform test.fst --alias mywave -- list_signals mywave --pattern clock"
+    );
     println!("  waveform-cli open_waveform test.vcd -- read_signal test top.clk --time-index 0");
     println!(
         "  waveform-cli open_waveform test.vcd -- find_signal_events test top.reset --limit 10"
@@ -158,7 +168,7 @@ fn execute_command(store: &mut WaveformStore, cmd: &Command) -> Result<String, S
 
             waveform.load_signals(&[signal_ref]);
 
-            let indices_to_read: Vec<usize> = if let Some(ref indices) = time_indices {
+            let indices_to_read: Vec<usize> = if let Some(indices) = time_indices {
                 indices.clone()
             } else if let Some(index) = time_index {
                 vec![*index]
