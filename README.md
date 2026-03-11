@@ -1,5 +1,7 @@
 # Waveform MCP Server
 
+[![Crates.io Version](https://img.shields.io/crates/v/waveform-mcp)](https://crates.io/crates/waveform-mcp)
+
 An MCP (Model Context Protocol) server for reading and analyzing waveform files (VCD/FST format) using the [wellen](https://github.com/ekiwi/wellen) library.
 
 ## Features
