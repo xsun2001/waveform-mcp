@@ -7,7 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-03-11
+
 ### Added
+- **Standalone CLI binary** (`waveform-cli`) - Direct command-line access to all waveform tools
+  - All 7 tools available: `open_waveform`, `close_waveform`, `list_signals`, `read_signal`, `get_signal_info`, `find_signal_events`, `find_conditional_events`
+  - Command chaining using `--` separator
+  - State persistence across chained commands
+  - Full help text and usage examples
+- **CLI parser library module** (`src/cli_parser.rs`) with comprehensive unit tests
+  - 18 test cases covering all CLI commands and error handling
+  - Extracted from binary to enable testing
 - **close_waveform** tool - Close waveforms and free memory
   - Useful for long-running HTTP sessions to manage memory usage
   - Returns success confirmation or error if waveform not found
@@ -16,6 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Updated `rmcp` from 0.14 to 0.16
 - Updated `lalrpop` and `lalrpop-util` from 0.22 to 0.23
+
+### Documentation
+- Added CLI section to README.md with usage examples
+- Added CLI section to CLAUDE.md for developer notes
 
 ## [0.3.0] - 2025-12-28
 
@@ -83,7 +97,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `get_signal_info` - Get signal metadata
 - `find_signal_events` - Find signal changes in time range
 
-[unreleased]: https://github.com/jiegec/waveform-mcp/compare/v0.3.0...HEAD
-[0.3.0]: https://github.com/jiegec/waveform-mcp/compare/v0.3.0...v0.3.0
+[unreleased]: https://github.com/jiegec/waveform-mcp/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/jiegec/waveform-mcp/compare/v0.3.0...v0.4.0
+[0.3.0]: https://github.com/jiegec/waveform-mcp/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/jiegec/waveform-mcp/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/jiegec/waveform-mcp/releases/tag/v0.1.0
