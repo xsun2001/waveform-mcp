@@ -166,6 +166,37 @@ The server supports two transport modes:
 
 When running in HTTP mode, the server listens on the specified bind address (default: `127.0.0.1:8000`). HTTP mode allows the waveform store to be shared across multiple HTTP sessions, enabling remote analysis of waveform files.
 
+## Standalone CLI
+
+In addition to the MCP server, a standalone CLI tool `waveform-cli` is available for direct command-line access without an MCP client.
+
+### CLI Usage
+
+```bash
+# Basic command
+waveform-cli open_waveform /path/to/waveform.vcd
+
+# Chain multiple commands with --
+waveform-cli open_waveform test.vcd -- list_signals test.vcd --pattern clk
+
+# Full workflow example
+waveform-cli open_waveform test.vcd --alias mywave -- \\
+  list_signals mywave -- \\
+  read_signal mywave top.clk --time-indices 0,1,2,3 -- \\
+  close_waveform mywave
+```
+
+### CLI Commands
+
+- **open_waveform** `<file_path>` [--alias `<name>`] - Open waveform file
+- **close_waveform** `<id>` - Close waveform
+- **list_signals** `<id>` [--pattern `<p>`] [--hierarchy `<h>`] [--recursive `<bool>`] [--limit `<n>`]
+- **read_signal** `<id>` `<signal>` [--time-index `<idx>` | --time-indices `<list>`]
+- **get_signal_info** `<id>` `<signal>` - Get signal metadata
+- **find_signal_events** `<id>` `<signal>` [--start `<idx>`] [--end `<idx>`] [--limit `<n>`]
+- **find_conditional_events** `<id>` `<condition>` [--start `<idx>`] [--end `<idx>`] [--limit `<n>`]
+
+
 ## Development
 
 ### Building

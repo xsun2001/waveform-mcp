@@ -49,12 +49,38 @@ Supported in `find_conditional_events`:
 
 Operator precedence (high to low): `~`/`!`, `==`/`!=`, `&`, `^`, `|`, `&&`, `||`
 
+## CLI Tool
+
+A standalone CLI binary `waveform-cli` is available for direct command-line access:
+
+```bash
+# Usage: waveform-cli <command> [args...] [-- <command2> ...]
+waveform-cli open_waveform test.vcd
+waveform-cli open_waveform test.vcd -- list_signals test.vcd --pattern clk
+
+# Chain multiple commands with -- separator
+waveform-cli open_waveform test.vcd -- read_signal test.vcd top.clk --time-index 0
+```
+
+**CLI Commands:**
+- `open_waveform <path> [--alias <name>]` - Open waveform file
+- `close_waveform <id>` - Close waveform
+- `list_signals <id> [--pattern <p>] [--hierarchy <h>] [--recursive <bool>] [--limit <n>]`
+- `read_signal <id> <signal> [--time-index <idx> | --time-indices <list>]`
+- `get_signal_info <id> <signal>`
+- `find_signal_events <id> <signal> [--start <idx>] [--end <idx>] [--limit <n>]`
+- `find_conditional_events <id> <condition> [--start <idx>] [--end <idx>] [--limit <n>]`
+
 ## Build & Test
 
 ```bash
 cargo build --release
 cargo test
 ```
+
+**Binaries:**
+- `target/release/waveform-mcp` - MCP server (stdio/HTTP modes)
+- `target/release/waveform-cli` - Standalone CLI tool
 
 ## Notes for Development
 
